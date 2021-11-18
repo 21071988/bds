@@ -28,8 +28,6 @@ export default createStore({
     toggleNewForm(state) {
       state.showNewForm = !state.showNewForm;
     },
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
     setBds(state, bds) {
       state.bdsList = bds;
       state.dataLoaded = true;
@@ -50,7 +48,7 @@ export default createStore({
       const bdsList = bdsSnapshot.docs.map((doc) => doc.data());
       const bds = bdsList;
       commit("setBds", bds);
-      return true;
+      return 'i did';
     },
   },
   modules: {},
