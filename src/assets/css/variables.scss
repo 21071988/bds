@@ -1,0 +1,24 @@
+/* colors */
+
+
+$grey: #565656;
+$hc: #459bf1;
+
+:export {
+  main: $hc;
+}
+.flex {
+  display: flex;
+}
+
+.col {
+  @extend .flex;
+  flex-direction: column;
+}
+
+.center {
+  @extend .col;
+  align-items: center;
+  justify-content: center;
+}
+
