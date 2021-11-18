@@ -7,7 +7,7 @@
         <input
           type="text"
           v-model="bd"
-          placeholder="birthday"
+          placeholder="dd/mm/yy"
           @keyup="formatText"
           ref="bdInput"
         />
@@ -33,6 +33,7 @@ export default defineComponent({
       present: "",
       newbd: {},
       keyCode: 0,
+      codes: ['0','1','2','3','4','5','6','7','8','9']
     };
   },
   methods: {
@@ -85,16 +86,38 @@ export default defineComponent({
       setDoc(doc(db, "bds", this.newbd.id), this.newbd);
     },
     formatText() {
-      if (this.keyCode !== 8 && this.keyCode !== 46) {
-        if (this.bd.length === 2 || this.bd.length === 5) {
-          this.bd = this.bd + "/";
-        }
+      if(this.codes.filter(code => code === this.keyCode).length === 0 && this.notDeleting) {
+        this.bd = this.bd.slice(0,-1)
+        return
       }
+      if(this.bd.length > 10) {
+        this.bd = this.bd.slice(0,-1)
+        return
+      }
+
+      this.bd = this.bd.split('')
+      if (
+        (this.bd.length === 2 || this.bd.length === 5) &&
+        this.notDeleting
+      ) {
+        this.bd.push("/");
+      }
+      if (this.bd.length ===3 && this.bd[2] !== "/") {
+        this.bd.push(this.bd[2])
+        this.bd.splice(2,1,'/')
+      }
+
+      if (this.bd.length ===5 && this.bd[4] !== "/") {
+        this.bd.push(this.bd[4])
+        this.bd.splice(5,1,'/')
+      }
+
+      this.bd = this.bd.join('')
     },
     addListener() {
       if (this.showForm) {
-        this.$refs.bdInput.addEventListener("keyup", (e) => {
-          this.keyCode = e.keyCode;
+        this.$refs.bdInput.addEventListener("keydown", (e) => {
+          this.keyCode = e.key;
         });
       }
     },
@@ -102,6 +125,9 @@ export default defineComponent({
   computed: {
     showForm() {
       return this.$store.getters.getShowNewForm;
+    },
+    notDeleting() {
+      return this.keyCode !== "Backspace" && this.keyCode !== "delete"
     },
   },
   mounted() {
