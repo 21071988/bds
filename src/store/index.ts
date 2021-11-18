@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/../firebaseInit";
+import { db } from "@/firebaseInit";
 import { bdInterface } from "@/interface/bdInterface";
 
 export default createStore({
