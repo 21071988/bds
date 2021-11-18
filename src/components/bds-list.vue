@@ -44,6 +44,9 @@ export default defineComponent({
       return this.$store.getters.getbdsList;
     },
   },
+  mounted() {
+    this.$store.dispatch('getBds')
+  }
 });
 </script>
 
