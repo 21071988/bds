@@ -21,7 +21,7 @@ export default defineComponent({
   computed: {
     getList(): bdInterface[] {
       return this.$store.getters.getbdsList.filter(
-        (bd: bdInterface) => bd.id === this.bdId
+        (bd: bdInterface) => bd.bdId === this.bdId
       );
     },
     isNotEmptyList(): boolean {

@@ -7,7 +7,6 @@
         <input
           type="text"
           v-model="bd"
-          placeholder="dd/mm/yy"
           @keyup="formatText"
           ref="bdInput"
         />
@@ -33,7 +32,7 @@ export default defineComponent({
       present: "",
       newbd: {},
       keyCode: 0,
-      codes: ['0','1','2','3','4','5','6','7','8','9']
+      codes: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9",0,1,2,3,4,5,6,7,8,9],
     };
   },
   methods: {
@@ -66,7 +65,6 @@ export default defineComponent({
       }
 
       const id = Date.now() + day + month;
-      console.log(id);
       this.validateBd();
 
       if (this.friend.length === 0 && this.bd.length === 0) {
@@ -77,17 +75,28 @@ export default defineComponent({
         id: id,
         friend: this.friend,
         bd: this.bd,
+        bdId: this.formatBdId(this.bd),
         present: this.present,
       };
-      console.log(this.newbd);
       this.$store.commit("newbd", this.newbd);
       this.$store.commit("toggleNewForm");
 
       setDoc(doc(db, "bds", this.newbd.id), this.newbd);
     },
+    formatBdId(bd) {
+      let day = bd.substr(0,2)
+      let month = bd.substr(3,2)
+      day[0] === "0" ? (day = day.substr(1, 1)) : true;
+      month[0] === "0" ? (month = month.substr(1, 1)) : true;
+      bd = day + month;
+      return bd;
+    },
     formatText() {
+      console.log(typeof(this.keyCode))
+      console.log(this.codes.filter(code => code === this.keyCode));
       if(this.codes.filter(code => code === this.keyCode).length === 0 && this.notDeleting) {
         this.bd = this.bd.slice(0,-1)
+        console.log(1)
         return
       }
       if(this.bd.length > 10) {
@@ -111,7 +120,6 @@ export default defineComponent({
         this.bd.push(this.bd[4])
         this.bd.splice(5,1,'/')
       }
-
       this.bd = this.bd.join('')
     },
     addListener() {

@@ -34,13 +34,20 @@ export default defineComponent({
     hideCldrListModal() {
       this.showCldrModal = false;
     },
+    formatBdId(bd: string) {
+      let day = bd.substr(0,2)
+      let month = bd.substr(3,2)
+      day[0] === "0" ? (day = day.substr(1, 1)) : true;
+      month[0] === "0" ? (month = month.substr(1, 1)) : true;
+      bd = day + month;
+      return bd;
+    },
   },
   computed: {
     hasbd(): boolean {
       return (
         this.$store.getters.getbdsList.filter(
-          (bd: bdInterface) => bd.id === this.dayId
-        ).length !== 0
+          (b: bdInterface) =>b.bdId === this.dayId).length !== 0
       );
     },
   },
@@ -51,6 +58,7 @@ export default defineComponent({
 @import "~@/assets/css/variables.scss";
 .day {
   position: relative;
+  text-align: center;
   &:hover {
     cursor: default;
   }

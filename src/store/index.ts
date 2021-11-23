@@ -8,7 +8,7 @@ export default createStore({
     bdsList: [] as any,
     showNewForm: false,
     dataLoaded: false,
-    mainColor: "#c493fc",
+    mainColor: "#b7daef",
   },
   getters: {
     getbdsList: (state) => {
@@ -36,9 +36,7 @@ export default createStore({
       state.bdsList.push(bd);
     },
     deletebd(state, id) {
-      console.log("commited " + id);
       state.bdsList = state.bdsList.filter((bd: bdInterface) => bd.id !== id);
-      console.log(state.bdsList);
     },
   },
   actions: {

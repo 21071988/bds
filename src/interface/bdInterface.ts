@@ -9,5 +9,8 @@ export interface bdInterface {
   bd: string;
 
   /* present you want to buy */
-  present: "sex with Mary";
+  present: string;
+
+  /* date id for finding on a calendar */
+  bdId: string;
 }

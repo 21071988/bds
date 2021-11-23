@@ -11,7 +11,7 @@
           <day
             :day="day"
             :color="'#cccccc'"
-            :dayId="(day + 1).toString() + (monthIdx + 1).toString()"
+            :dayId="(day).toString() + (monthIdx + 1).toString()"
           />
         </template>
       </div>
@@ -85,7 +85,6 @@ export default {
     isDataLoaded() {
       this.$nextTick(() => {
         this.coloredDays = Array.from(document.querySelectorAll(".hasbd"));
-        console.log(this.coloredDays);
         this.coloredDays.forEach((day) => {
           day.style.background = this.$store.getters.mainColor;
         });
