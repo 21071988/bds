@@ -81,7 +81,7 @@ export default defineComponent({
       this.$store.commit("newbd", this.newbd);
       this.$store.commit("toggleNewForm");
 
-      setDoc(doc(db, "bds", this.newbd.id), this.newbd);
+      setDoc(doc(db, "bds1", this.newbd.id), this.newbd);
     },
     formatBdId(bd) {
       let day = bd.substr(0,2)

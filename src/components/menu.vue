@@ -1,5 +1,8 @@
 <template>
   <div class="menu-wrapper">
+    <div @click="createUser">login</div>
+    <input type="text" v-model="email">
+    <input type="text" v-model="password">
     <div class="menu-burger" @click="showMenu = !showMenu">
       <hr :class="{ shown1: showMenu }" />
       <hr :class="{ shown2: showMenu }" />
@@ -15,13 +18,33 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 export default {
   name: "menu",
   data() {
     return {
       showMenu: false,
+      email: '',
+      password: ''
     };
   },
+  methods: {
+    createUser() {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user)
+            // ...
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // ..
+          });
+    }
+  }
 };
 </script>
 
