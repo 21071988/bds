@@ -9,6 +9,7 @@ export default createStore({
     showNewForm: false,
     dataLoaded: false,
     mainColor: "#b7daef",
+    showLoginForm: false,
   },
   getters: {
     getbdsList: (state) => {
@@ -16,6 +17,9 @@ export default createStore({
     },
     getShowNewForm: (state) => {
       return state.showNewForm;
+    },
+    getShowLoginForm: (state) => {
+      return state.showLoginForm;
     },
     dataLoaded: (state) => {
       return state.dataLoaded;
@@ -27,6 +31,9 @@ export default createStore({
   mutations: {
     toggleNewForm(state) {
       state.showNewForm = !state.showNewForm;
+    },
+    toggleLogin(state) {
+      state.showLoginForm = !state.showLoginForm;
     },
     setBds(state, bds) {
       state.bdsList = bds;
